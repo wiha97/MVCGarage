@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MVCGarage.DataAccess;
-using MVCGarage.Models;
+﻿using MVCGarage.Models;
+using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Vehicles;
+using System.Net;
+using System.Web.Mvc;
 
 namespace MVCGarage.Controllers
 {
     public class VehiclesController : Controller
     {
-        private GarageContext db = new GarageContext();
+        private VehicleRepository db = new VehicleRepository();
 
         // GET: Vehicles
         public ActionResult Index()
         {
-            return View(db.Vehicles.ToList());
+            return View(db.GetAllVehicles());
         }
 
         // GET: Vehicles/Details/5
@@ -29,7 +23,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -59,8 +53,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Vehicles.Add(vehicle);
-                db.SaveChanges();
+                db.Add(vehicle);
                 return RedirectToAction(originActionName, originControllerName);
             }
 
@@ -76,7 +69,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -93,8 +86,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Edit(vehicle);
                 return RedirectToAction("Index");
             }
             return View(vehicle);
@@ -107,7 +99,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -120,9 +112,7 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
-            db.SaveChanges();
+            db.Delete(id);
             return RedirectToAction("Index");
         }
 
