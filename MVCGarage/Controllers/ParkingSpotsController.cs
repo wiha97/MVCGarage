@@ -1,6 +1,7 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
+using MVCGarage.ViewModels.ParkingSpots;
 using System.Net;
 using System.Web.Mvc;
 
@@ -35,11 +36,14 @@ namespace MVCGarage.Controllers
         }
 
         // GET: ParkingSpots/Create
-        public ActionResult Create()
+        public ActionResult Create(CreateParkingSpotsVM viewModel)
         {
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
-            return View();
+            if (viewModel.OriginActionName == null)
+                viewModel.OriginActionName = "Index";
+
+            return View(viewModel);
         }
 
         // POST: ParkingSpots/Create
@@ -47,13 +51,17 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
+                                   string originActionName,
+                                   string originControllerName)
         {
             if (ModelState.IsValid)
             {
                 db.Add(parkingSpot);
-                return RedirectToAction("Index");
+                return RedirectToAction(originActionName, originControllerName);
             }
+
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
             return View(parkingSpot);
         }

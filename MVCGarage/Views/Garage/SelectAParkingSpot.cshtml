@@ -1,13 +1,21 @@
 ﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
 
 @{
-    ViewBag.Title = "SelectAParkingSpot";
+    ViewBag.Title = "Select A Parking Spot";
 }
 
 <h2>SelectAParkingSpot</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New",
+                     "Create",
+                     "ParkingSpots",
+                     new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
+                     {
+                         OriginActionName = "SelectAParkingSpot",
+                         OriginControllerName = "Garage"
+                     },
+                     null)
 </p>
 
 @using (@Html.BeginForm("ParkingSpotSelected", "Garage", FormMethod.Post))
@@ -40,7 +48,7 @@
         <input name="submit-button"
                type="submit"
                style="font-weight:bold;margin:10px 0 10px 0;"
-               value="Validate Parking Spot"
+               value="Choose the selected Parking Spot"
                class="btn btn-default" /> |
         @Html.ActionLink("Back to List", "Index", "ParkingSpots")
         @Html.HiddenFor(model => Model.VehicleID)

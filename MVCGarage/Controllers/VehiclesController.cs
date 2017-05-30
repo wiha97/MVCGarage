@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVCGarage.DataAccess;
 using MVCGarage.Models;
+using MVCGarage.ViewModels.Vehicles;
 
 namespace MVCGarage.Controllers
 {
@@ -37,9 +38,14 @@ namespace MVCGarage.Controllers
         }
 
         // GET: Vehicles/Create
-        public ActionResult Create()
+        public ActionResult Create(CreateVehicleVM viewModel)
         {
-            return View();
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+            if (viewModel.OriginActionName == null)
+                viewModel.OriginActionName = "Index";
+
+            return View(viewModel);
         }
 
         // POST: Vehicles/Create
@@ -47,16 +53,20 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle,
+                                   string originActionName,
+                                   string originControllerName)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(originActionName, originControllerName);
             }
 
-            return View(vehicle);
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+            return View(new CreateVehicleVM { Vehicle = vehicle, OriginControllerName = "Vehicles", OriginActionName = "Create" });
         }
 
         // GET: Vehicles/Edit/5

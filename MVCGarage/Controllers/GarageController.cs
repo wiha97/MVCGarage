@@ -26,10 +26,21 @@ namespace MVCGarage.Controllers
             return View(new BookAParkingSpotVM { Vehicles = vehicles.GetAllVehicles() });
         }
 
+        [HttpPost]
+        public ActionResult BookAPartkingSpot()
+        {
+            // We end up here from the "Create" view of "Vehicles", called by the "BookAParkingSpot/Get"
+            // Just need to redirect to the origin view
+            return RedirectToAction("BookAParkingSpot");
+        }
+
         [HttpGet]
         public ActionResult SelectAParkingSpot(BookAParkingSpotVM viewModel)
         {
             Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
+
+            if (vehicle == null)
+                return RedirectToAction("Index", "ParkingSpots");
 
             // Allows the user to select an available parking spot (if any), depending on the type of vehicle
             return View(new BookAParkingSpotVM
@@ -51,13 +62,6 @@ namespace MVCGarage.Controllers
                 Vehicle = vehicles.Vehicle(viewModel.VehicleID),
                 ParkingSpot = parkingSpots.ParkingSpot(viewModel.ParkingSpotID)
             });
-        }
-
-        // POST: Garage/BookAParkingSpot
-        [HttpPost]
-        public ActionResult BookAParkingSpot(BookAParkingSpotVM viewModel)
-        {
-            return RedirectToAction("Index", "ParkingSpots");
         }
 
         protected override void Dispose(bool disposing)

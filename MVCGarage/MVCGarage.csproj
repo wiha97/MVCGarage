@@ -173,6 +173,8 @@
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="ViewModels\Garage\BookAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
+    <Compile Include="ViewModels\ParkingSpots\CreateParkingSpotsVM.cs" />
+    <Compile Include="ViewModels\Vehicles\CreateVehicleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Garage.mdf" />
