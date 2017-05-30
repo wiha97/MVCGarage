@@ -12,7 +12,7 @@ namespace MVCGarage.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        VehicleID = c.Int(nullable: false),
+                        VehicleID = c.Int(),
                         Label = c.String(),
                         VehicleType = c.Int(nullable: false),
                     })
@@ -29,7 +29,7 @@ namespace MVCGarage.Migrations
                         RegistrationPlate = c.String(),
                         CheckInTime = c.DateTime(nullable: false),
                         CheckOutTime = c.DateTime(nullable: false),
-                        ParkingSpot = c.Int(nullable: false),
+                        ParkingSpot = c.Int(),
                     })
                 .PrimaryKey(t => t.ID);
             

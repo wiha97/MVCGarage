@@ -15,6 +15,6 @@ namespace MVCGarage.Models
         public string RegistrationPlate { get; set; }
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
-        public int ParkingSpot { get; set; }
+        public int? ParkingSpot { get; set; }
     }
 }

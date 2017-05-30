@@ -22,19 +22,38 @@ namespace MVCGarage.Repositories
             return db.ParkingSpots.Find(id);
         }
 
-        public void AddParkingSpot(ParkingSpot parkingSpot)
+        public ParkingSpot FirstAvailableSpot(ETypeVehicle vehicleType)
+        {
+            return ParkingSpots().SingleOrDefault(p => p.VehicleType == vehicleType && p.VehicleID == null);
+        }
+
+        public void Add(ParkingSpot parkingSpot)
         {
             db.ParkingSpots.Add(parkingSpot);
             SaveChanges();
         }
 
-        public void EditParkingSpot(ParkingSpot parkingSpot)
+        public void Edit(ParkingSpot parkingSpot)
         {
             db.Entry(parkingSpot).State = EntityState.Modified;
             SaveChanges();
         }
 
-        public void DeleteParkingSpot(int id)
+        public void CheckIn(int parkingSpotId, int vehicleId)
+        {
+            ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
+            parkingSpot.VehicleID = vehicleId;
+            Edit(parkingSpot);
+        }
+
+        public void CheckOut(int parkingSpotId)
+        {
+            ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
+            parkingSpot.VehicleID = null;
+            Edit(parkingSpot);
+        }
+
+        public void Delete(int id)
         {
             db.ParkingSpots.Remove(ParkingSpot(id));
             db.SaveChanges();

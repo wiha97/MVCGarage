@@ -45,7 +45,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AddParkingSpot(parkingSpot);
+                db.Add(parkingSpot);
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +76,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.EditParkingSpot(parkingSpot);
+                db.Edit(parkingSpot);
                 return RedirectToAction("Index");
             }
             return View(parkingSpot);
@@ -102,7 +102,7 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            db.DeleteParkingSpot(id);
+            db.Delete(id);
             return RedirectToAction("Index");
         }
 
