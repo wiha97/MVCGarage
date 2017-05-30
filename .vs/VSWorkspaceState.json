@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MVCGarage"
+    "\\MVCGarage",
+    "\\MVCGarage\\Models"
   ],
-  "SelectedNode": "\\packages",
+  "SelectedNode": "\\MVCGarage\\bin",
   "PreviewInSolutionExplorer": false
 }
