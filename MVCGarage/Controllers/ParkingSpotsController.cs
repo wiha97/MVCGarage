@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using MVCGarage.Models;
+using MVCGarage.Repositories;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVCGarage.DataAccess;
-using MVCGarage.Models;
 
 namespace MVCGarage.Controllers
 {
     public class ParkingSpotsController : Controller
     {
-        private GarageContext db = new GarageContext();
+        private ParkingSpotsRepository db = new ParkingSpotsRepository();
 
         // GET: ParkingSpots
         public ActionResult Index()
         {
-            return View(db.ParkingSpots.ToList());
+            return View(db.ParkingSpots());
         }
 
         // GET: ParkingSpots/Details/5
@@ -28,7 +22,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ParkingSpot parkingSpot = db.ParkingSpots.Find(id);
+            ParkingSpot parkingSpot = db.ParkingSpot(id);
             if (parkingSpot == null)
             {
                 return HttpNotFound();
@@ -51,8 +45,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ParkingSpots.Add(parkingSpot);
-                db.SaveChanges();
+                db.AddParkingSpot(parkingSpot);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +59,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ParkingSpot parkingSpot = db.ParkingSpots.Find(id);
+            ParkingSpot parkingSpot = db.ParkingSpot(id);
             if (parkingSpot == null)
             {
                 return HttpNotFound();
@@ -83,8 +76,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(parkingSpot).State = EntityState.Modified;
-                db.SaveChanges();
+                db.EditParkingSpot(parkingSpot);
                 return RedirectToAction("Index");
             }
             return View(parkingSpot);
@@ -97,7 +89,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ParkingSpot parkingSpot = db.ParkingSpots.Find(id);
+            ParkingSpot parkingSpot = db.ParkingSpot(id);
             if (parkingSpot == null)
             {
                 return HttpNotFound();
@@ -110,9 +102,7 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ParkingSpot parkingSpot = db.ParkingSpots.Find(id);
-            db.ParkingSpots.Remove(parkingSpot);
-            db.SaveChanges();
+            db.DeleteParkingSpot(id);
             return RedirectToAction("Index");
         }
 
