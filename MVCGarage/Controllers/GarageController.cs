@@ -39,6 +39,8 @@ namespace MVCGarage.Controllers
         {
             Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
 
+            // Happends if the user clicks on "Submit" without having selected a vehicle
+            // or if the URL is manually entered
             if (vehicle == null)
                 return RedirectToAction("Index", "ParkingSpots");
 
@@ -46,6 +48,7 @@ namespace MVCGarage.Controllers
             return View(new BookAParkingSpotVM
             {
                 VehicleID = viewModel.VehicleID,
+                Vehicles = vehicles.GetAllVehicles(),
                 ParkingSpots = parkingSpots.AvailableParkingSpots(vehicle.VehicleType)
             });
         }

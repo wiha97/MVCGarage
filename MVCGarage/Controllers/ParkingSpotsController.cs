@@ -53,12 +53,13 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
                                    string originActionName,
-                                   string originControllerName)
+                                   string originControllerName,
+                                   int selectedVehicleId)
         {
             if (ModelState.IsValid)
             {
                 db.Add(parkingSpot);
-                return RedirectToAction(originActionName, originControllerName);
+                return RedirectToAction(originActionName, originControllerName, new BookAParkingSpotVM { VehicleID = selectedVehicleId });
             }
 
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();

@@ -4,7 +4,38 @@
     ViewBag.Title = "Select A Parking Spot";
 }
 
-<h2>SelectAParkingSpot</h2>
+<h2>Please select a parking spot:</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        @{MVCGarage.Models.Vehicle selectedVehicle = Model.Vehicles.Single(v => v.ID == Model.VehicleID);}
+
+        <dt>
+            @Html.DisplayNameFor(model => selectedVehicle.RegistrationPlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => selectedVehicle.RegistrationPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => selectedVehicle.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => selectedVehicle.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => selectedVehicle.VehicleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => selectedVehicle.VehicleType)
+        </dd>
+
+    </dl>
+</div>
 
 <p>
     @Html.ActionLink("Create New",
@@ -13,7 +44,8 @@
                      new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
                      {
                          OriginActionName = "SelectAParkingSpot",
-                         OriginControllerName = "Garage"
+                         OriginControllerName = "Garage",
+                         SelectedVehicleId = Model.VehicleID
                      },
                      null)
 </p>

@@ -7,5 +7,6 @@ namespace MVCGarage.ViewModels.ParkingSpots
         public ParkingSpot ParkingSpot { get; set; }
         public string OriginActionName { get; set; }
         public string OriginControllerName { get; set; }
+        public int SelectedVehicleId { get; set; }
     }
 }
