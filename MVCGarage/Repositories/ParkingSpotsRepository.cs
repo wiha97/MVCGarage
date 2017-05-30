@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace MVCGarage.Repositories
 {
@@ -22,9 +21,14 @@ namespace MVCGarage.Repositories
             return db.ParkingSpots.Find(id);
         }
 
+        public IEnumerable<ParkingSpot> AvailableSpots(ETypeVehicle vehicleType)
+        {
+            return ParkingSpots().Where(p => p.VehicleType == vehicleType && p.VehicleID == null);
+        }
+
         public ParkingSpot FirstAvailableSpot(ETypeVehicle vehicleType)
         {
-            return ParkingSpots().SingleOrDefault(p => p.VehicleType == vehicleType && p.VehicleID == null);
+            return AvailableSpots(vehicleType).FirstOrDefault();
         }
 
         public void Add(ParkingSpot parkingSpot)

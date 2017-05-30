@@ -13,8 +13,8 @@ namespace MVCGarage.Models
         public string Owner { get; set; }
         public double Fee { get; set; }
         public string RegistrationPlate { get; set; }
-        public DateTime CheckInTime { get; set; }
-        public DateTime CheckOutTime { get; set; }
+        public DateTime? CheckInTime { get; set; }
+        public DateTime? CheckOutTime { get; set; }
         public int? ParkingSpot { get; set; }
     }
 }
