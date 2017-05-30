@@ -10,9 +10,12 @@ namespace MVCGarage.Controllers
         private ParkingSpotsRepository db = new ParkingSpotsRepository();
 
         // GET: ParkingSpots
-        public ActionResult Index()
+        public ActionResult Index(bool filterAvailableOnly = false)
         {
-            return View(db.ParkingSpots());
+            if (filterAvailableOnly)
+                return View(db.AvailableSpots());
+            else
+                return View(db.ParkingSpots());
         }
 
         // GET: ParkingSpots/Details/5
@@ -33,6 +36,8 @@ namespace MVCGarage.Controllers
         // GET: ParkingSpots/Create
         public ActionResult Create()
         {
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
             return View();
         }
 
@@ -64,6 +69,8 @@ namespace MVCGarage.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
             return View(parkingSpot);
         }
 

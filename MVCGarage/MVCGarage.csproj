@@ -163,6 +163,7 @@
       <DependentUpon>201705300921536_Initial1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EnumHelper.cs" />
     <Compile Include="Models\ETypeVehicle.cs" />
     <Compile Include="Models\ParkingSpot.cs" />
     <Compile Include="Models\Vehicle.cs" />
