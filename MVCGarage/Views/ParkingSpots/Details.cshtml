@@ -1,0 +1,42 @@
+﻿@model MVCGarage.Models.ParkingSpot
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ParkingSpot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
