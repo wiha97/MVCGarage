@@ -17,6 +17,11 @@ namespace MVCGarage.Repositories
             return db.Vehicles;
         }
 
+        public Vehicle Vehicle(int vehicleId)
+        {
+            return GetAllVehicles().SingleOrDefault(v => v.ID == vehicleId);
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -40,12 +45,6 @@ namespace MVCGarage.Repositories
             GC.SuppressFinalize(this);
         }
         #endregion
-
-
-
-
-
-
 
     }
 }

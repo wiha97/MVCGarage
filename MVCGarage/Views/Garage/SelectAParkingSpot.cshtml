@@ -1,0 +1,49 @@
+﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
+
+@{
+    ViewBag.Title = "SelectAParkingSpot";
+}
+
+<h2>SelectAParkingSpot</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (@Html.BeginForm("ParkingSpotSelected", "Garage", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @* Blank for the radiobutton *@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingSpots.First().Label)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.ParkingSpots)
+        {
+            <tr>
+                <td>
+                    @Html.RadioButtonFor(modelItem => modelItem.ParkingSpotID, item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        <input name="submit-button"
+               type="submit"
+               style="font-weight:bold;margin:10px 0 10px 0;"
+               value="Validate Parking Spot"
+               class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+        @Html.HiddenFor(model => Model.VehicleID)
+    </div>
+
+}

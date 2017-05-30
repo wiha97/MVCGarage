@@ -1,5 +1,6 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
+using MVCGarage.ViewModels.Garage;
 using System.Net;
 using System.Web.Mvc;
 
@@ -13,7 +14,7 @@ namespace MVCGarage.Controllers
         public ActionResult Index(bool filterAvailableOnly = false)
         {
             if (filterAvailableOnly)
-                return View(db.AvailableSpots());
+                return View(db.AvailableParkingSpots());
             else
                 return View(db.ParkingSpots());
         }
