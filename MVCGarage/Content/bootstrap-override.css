@@ -1,2 +1,16 @@
-﻿body-bg {
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: Drugs;
+    src: url("fonts/Drugs.otf") format('opentype');
+}
+
+body-bg {
+    background-image: url(images/body-bg-1.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
 }
