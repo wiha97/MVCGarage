@@ -13,4 +13,20 @@ body-bg {
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: scroll;
+    background-color: #2C302E;
+}
+
+.main-body-text {
+    color: white;
+    text-align: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 50px;
+    text-shadow: 2px 2px 20px #000;
+    margin-bottom: 7em;
+}
+
+.main-body-text h1 {
+    font-size: 100px;
 }
