@@ -10,7 +10,7 @@ namespace MVCGarage.Models
     {
         [Key]
         public int ID { get; set; }
-        public int VehicleID { get; set; }
+        public int? VehicleID { get; set; }
         public string Label { get; set; }
         public ETypeVehicle VehicleType {get; set;}
     }
