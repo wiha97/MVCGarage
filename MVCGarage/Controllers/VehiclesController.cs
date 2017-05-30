@@ -8,17 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using MVCGarage.DataAccess;
 using MVCGarage.Models;
+using MVCGarage.Repositories;
 
 namespace MVCGarage.Controllers
 {
     public class VehiclesController : Controller
     {
-        private GarageContext db = new GarageContext();
+        private VehicleRepository db = new VehicleRepository();
 
         // GET: Vehicles
         public ActionResult Index()
         {
-            return View(db.Vehicles.ToList());
+            return View(db.GetAllVehicles());
         }
 
         // GET: Vehicles/Details/5
@@ -28,7 +29,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.GetAllVehicles().Find(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -51,7 +52,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Vehicles.Add(vehicle);
+                db.GetAllVehicles().Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +67,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.GetAllVehicles().Find(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
