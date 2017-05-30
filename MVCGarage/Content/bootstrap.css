@@ -58,7 +58,8 @@ html {
 }
 
 body {
-  margin: 0;
+    margin: 0;
+    background-color: #2C302E;
 }
 
 a:focus {
@@ -70,10 +71,6 @@ a:hover {
   outline: 0;
 }
 
-h1 {
-  margin: 0.67em 0;
-  font-size: 2em;
-}
 
 abbr[title] {
   border-bottom: 1px dotted;
@@ -311,11 +308,15 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
+    font-family: "Drugs", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #ffffff;
+    background-color: #2C302E;
+    background-image: url("images/body-bg-1.jpg");
+    background-size:100%;
+    background-attachment:scroll;
+    background-repeat:no-repeat;
 }
 
 input,
@@ -461,13 +462,12 @@ cite {
   text-align: center;
 }
 
-h1,
+
 h2,
 h3,
 h4,
 h5,
 h6,
-.h1,
 .h2,
 .h3,
 .h4,
@@ -495,7 +495,6 @@ h6 small,
   color: #999999;
 }
 
-h1,
 h2,
 h3 {
   margin-top: 20px;
@@ -507,11 +506,6 @@ h5,
 h6 {
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-h1,
-.h1 {
-  font-size: 36px;
 }
 
 h2,
@@ -559,7 +553,9 @@ h4 small,
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee;
+  font-size: 50px;
+  text-shadow: 10px 10px 10px #000000;
+  text-align: center;
 }
 
 ul,

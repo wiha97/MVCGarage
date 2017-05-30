@@ -21,9 +21,9 @@ namespace MVCGarage.Repositories
             return db.ParkingSpots.Find(id);
         }
 
-        public IEnumerable<ParkingSpot> AvailableSpots(ETypeVehicle vehicleType)
+        public IEnumerable<ParkingSpot> AvailableSpots(ETypeVehicle vehicleType = ETypeVehicle.undefined)
         {
-            return ParkingSpots().Where(p => p.VehicleType == vehicleType && p.VehicleID == null);
+            return ParkingSpots().Where(p => (vehicleType == ETypeVehicle.undefined || p.VehicleType == vehicleType) && p.VehicleID == null);
         }
 
         public ParkingSpot FirstAvailableSpot(ETypeVehicle vehicleType)
