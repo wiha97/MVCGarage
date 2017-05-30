@@ -24,9 +24,9 @@ namespace MVCGarage
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-override.css",
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"
+                "~/Content/bootstrap.css",
+                "~/Content/index-css.css",
+                "~/Content/site.css"
                       ));
         }
     }

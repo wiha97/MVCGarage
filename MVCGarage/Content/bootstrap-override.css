@@ -30,3 +30,11 @@ body-bg {
 .main-body-text h1 {
     font-size: 100px;
 }
+
+.table-custom {
+    background-color: #808080;
+    color: black;
+    padding: 20px;
+    width: 80%;
+    height: auto;
+}
