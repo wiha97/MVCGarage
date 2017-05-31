@@ -8,6 +8,7 @@ namespace MVCGarage.Models
 {
     public enum ETypeVehicle
     {
+        [Description("All vehicle types")]
         undefined,
         [Description("Car")]
         car,

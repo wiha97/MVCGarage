@@ -1,7 +1,7 @@
-﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
+﻿@model MVCGarage.ViewModels.Garage.SelectAVehicleVM
 
 @{
-    ViewBag.Title = "Book A Parking Spot";
+    ViewBag.Title = "Select A Vehicle";
 }
 
 <h2>Please select the Vehicle you want to book the spot for:</h2>
@@ -10,8 +10,12 @@
     @Html.ActionLink("Create New",
                      "Create",
                      "Vehicles",
-                     new MVCGarage.ViewModels.Vehicles.CreateVehicleVM { OriginActionName = "BookAParkingSpot", 
-                                                                         OriginControllerName = "Garage" },
+                     new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
+                     {
+                         OriginActionName = "SelectAVehicle",
+                         OriginControllerName = "Garage",
+                         CheckInVehicle = Model.CheckInVehicle
+                     },
                      null)
 </p>
 
@@ -37,7 +41,14 @@
         {
             <tr>
                 <td>
-                    @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID)
+                    @if (Model.VehicleID == item.ID)
+                    {
+                        @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID, new { @autofocus = "autofocus", Checked = "checked" })
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID)
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RegistrationPlate)
@@ -46,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Owner)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VehicleType)
+                    @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                 </td>
             </tr>
         }
@@ -60,5 +71,6 @@
                value="Choose the selected vehicle"
                class="btn btn-default" /> |
         @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+        @Html.HiddenFor(model => Model.CheckInVehicle)
     </div>
 }

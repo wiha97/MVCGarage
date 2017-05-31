@@ -11,9 +11,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
+        </dt>
+        <dd>
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
         </dd>
@@ -21,19 +27,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.Vehicle.Owner)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Vehicle.Owner)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => MVCGarage.Models.EnumHelper.GetDescriptionAttr(model.Vehicle.VehicleType))
-        </dd>
-
     </dl>
 </div>
 

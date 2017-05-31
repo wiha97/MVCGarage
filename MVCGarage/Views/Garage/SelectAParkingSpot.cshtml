@@ -1,4 +1,4 @@
-﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
+﻿@model MVCGarage.ViewModels.Garage.SelectAParkingSpotVM
 
 @{
     ViewBag.Title = "Select A Parking Spot";
@@ -8,49 +8,44 @@
 
 <div>
     <dl class="dl-horizontal">
-        @{MVCGarage.Models.Vehicle selectedVehicle = Model.Vehicles.Single(v => v.ID == Model.VehicleID);}
-
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.RegistrationPlate)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.VehicleType)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.RegistrationPlate)
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.Owner)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.RegistrationPlate)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.Owner)
+            @Html.DisplayFor(model => Model.SelectedVehicle.RegistrationPlate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.VehicleType)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.Owner)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.VehicleType)
+            @Html.DisplayFor(model => Model.SelectedVehicle.Owner)
         </dd>
-
     </dl>
 </div>
 
-<p>
-    @Html.ActionLink("Create New",
-                     "Create",
-                     "ParkingSpots",
-                     new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
-                     {
-                         OriginActionName = "SelectAParkingSpot",
-                         OriginControllerName = "Garage",
-                         SelectedVehicleId = Model.VehicleID
-                     },
-                     null)
-</p>
+@*<p>
+        @Html.ActionLink("Create New",
+                         "Create",
+                         "ParkingSpots",
+                         new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
+                         {
+                             OriginActionName = "SelectAParkingSpot",
+                             OriginControllerName = "Garage",
+                             SelectedVehicleId = Model.VehicleID,
+                             VehicleType = Model.SelectedVehicle.VehicleType
+                         },
+                         null)
+    </p>*@
 
-@using (@Html.BeginForm("ParkingSpotSelected", "Garage", FormMethod.Post))
+@using (@Html.BeginForm(Model.OriginActionName, Model.OriginControllerName, FormMethod.Post))
 {
     <table class="table">
         <tr>
@@ -66,7 +61,14 @@
         {
             <tr>
                 <td>
-                    @Html.RadioButtonFor(modelItem => modelItem.ParkingSpotID, item.ID)
+                    @if (Model.ParkingSpotID == item.ID)
+                    {
+                        @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID, new { Checked = "checked" })
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID)
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Label)

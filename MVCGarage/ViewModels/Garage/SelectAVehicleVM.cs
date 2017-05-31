@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace MVCGarage.ViewModels.Garage
 {
-    public class BookAParkingSpotVM
+    public class SelectAVehicleVM
     {
         public IEnumerable<Vehicle> Vehicles { get; set; }
         public int VehicleID { get; set; }
 
-        public IEnumerable<ParkingSpot> ParkingSpots { get; set; }
-        public int ParkingSpotID { get; set; }
+        public bool CheckInVehicle { get; set; }
     }
 }

@@ -23,19 +23,22 @@ namespace MVCGarage.Controllers
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
-            return View(new BookAParkingSpotVM { Vehicles = vehicles.GetAllVehicles() });
-        }
-
-        [HttpPost]
-        public ActionResult BookAPartkingSpot()
-        {
-            // We end up here from the "Create" view of "Vehicles", called by the "BookAParkingSpot/Get"
-            // Just need to redirect to the origin view
-            return RedirectToAction("BookAParkingSpot");
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { CheckInVehicle = false });
         }
 
         [HttpGet]
-        public ActionResult SelectAParkingSpot(BookAParkingSpotVM viewModel)
+        public ActionResult SelectAVehicle(SelectAVehicleVM viewModel)
+        {
+            return View(new SelectAVehicleVM
+            {
+                CheckInVehicle = viewModel.CheckInVehicle,
+                Vehicles = vehicles.GetAllVehicles(),
+                VehicleID = viewModel.VehicleID
+            });
+        }
+
+        [HttpGet]
+        public ActionResult SelectAParkingSpot(SelectAParkingSpotVM viewModel)
         {
             Vehicle vehicle = vehicles.Vehicle(viewModel.VehicleID);
 
@@ -44,17 +47,34 @@ namespace MVCGarage.Controllers
             if (vehicle == null)
                 return RedirectToAction("Index", "ParkingSpots");
 
+            string originActionName = "ParkingSpotBooked";
+            string originControllerName = "Garage";
+
+            if (viewModel.CheckInVehicle)
+                originActionName = "VehicleCheckedIn";
+
             // Allows the user to select an available parking spot (if any), depending on the type of vehicle
-            return View(new BookAParkingSpotVM
+            return View(new SelectAParkingSpotVM
             {
                 VehicleID = viewModel.VehicleID,
-                Vehicles = vehicles.GetAllVehicles(),
-                ParkingSpots = parkingSpots.AvailableParkingSpots(vehicle.VehicleType)
+                SelectedVehicle = vehicle,
+                ParkingSpots = parkingSpots.AvailableParkingSpots(vehicle.VehicleType),
+                ParkingSpotID = viewModel.ParkingSpotID,
+                OriginActionName = originActionName,
+                OriginControllerName = originControllerName
             });
         }
 
         [HttpPost]
-        public ActionResult ParkingSpotSelected(BookAParkingSpotVM viewModel)
+        public ActionResult SelectAParkingSpot(bool checkInVehicle)
+        {
+            // We end up here from the "Create" view of "ParkingSpots", called by the "SelectAParkingSpot/Get"
+            // Just need to redirect to the origin view
+            return RedirectToAction("SelectAParkingSpot", new { checkInVehicle = checkInVehicle });
+        }
+
+        [HttpPost]
+        public ActionResult ParkingSpotBooked(SelectAParkingSpotVM viewModel)
         {
             // Check in the vehicle ID to the parking spot
             parkingSpots.CheckIn(viewModel.ParkingSpotID, viewModel.VehicleID);
