@@ -1399,7 +1399,7 @@ pre code {
   }
 }
 
-table {
+´.table {
   background-color: #333;
   padding: 40px;
   width: auto;
@@ -1414,10 +1414,6 @@ th {
   text-align: left;
 }
 
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-}
 
 .table thead > tr > th,
 .table tbody > tr > th,
