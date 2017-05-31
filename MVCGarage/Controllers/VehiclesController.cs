@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using MVCGarage.Models;
+using MVCGarage.Repositories;
+using MVCGarage.ViewModels.Vehicles;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVCGarage.DataAccess;
-using MVCGarage.Models;
 
 namespace MVCGarage.Controllers
 {
     public class VehiclesController : Controller
     {
-        private GarageContext db = new GarageContext();
+        private VehicleRepository db = new VehicleRepository();
 
         // GET: Vehicles
         public ActionResult Index()
         {
-            return View(db.Vehicles.ToList());
+            return View(db.GetAllVehicles());
         }
 
         // GET: Vehicles/Details/5
@@ -28,7 +23,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -37,9 +32,14 @@ namespace MVCGarage.Controllers
         }
 
         // GET: Vehicles/Create
-        public ActionResult Create()
+        public ActionResult Create(CreateVehicleVM viewModel)
         {
-            return View();
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+            if (viewModel.OriginActionName == null)
+                viewModel.OriginActionName = "Index";
+
+            return View(viewModel);
         }
 
         // POST: Vehicles/Create
@@ -47,16 +47,19 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle,
+                                   string originActionName,
+                                   string originControllerName)
         {
             if (ModelState.IsValid)
             {
-                db.Vehicles.Add(vehicle);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                db.Add(vehicle);
+                return RedirectToAction(originActionName, originControllerName);
             }
 
-            return View(vehicle);
+            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+            return View(new CreateVehicleVM { Vehicle = vehicle, OriginControllerName = "Vehicles", OriginActionName = "Create" });
         }
 
         // GET: Vehicles/Edit/5
@@ -66,7 +69,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -83,8 +86,7 @@ namespace MVCGarage.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Edit(vehicle);
                 return RedirectToAction("Index");
             }
             return View(vehicle);
@@ -97,7 +99,7 @@ namespace MVCGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicle(id);
             if (vehicle == null)
             {
                 return HttpNotFound();
@@ -110,9 +112,7 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
-            db.SaveChanges();
+            db.Delete(id);
             return RedirectToAction("Index");
         }
 

@@ -67,7 +67,6 @@ C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\Microsoft.AI.Dependen
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\Microsoft.AI.Web.xml
-C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
 C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\bin\ApplicationInsights.config
@@ -218,3 +217,4 @@ C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csproj.Gener
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
 C:\Users\Keuthonymous\Source\Repos\MVCGarage2\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial1.resources
+C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial1.resources

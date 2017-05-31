@@ -1,0 +1,64 @@
+﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
+
+@{
+    ViewBag.Title = "Book A Parking Spot";
+}
+
+<h2>Please select the Vehicle you want to book the spot for:</h2>
+
+<p>
+    @Html.ActionLink("Create New",
+                     "Create",
+                     "Vehicles",
+                     new MVCGarage.ViewModels.Vehicles.CreateVehicleVM { OriginActionName = "BookAParkingSpot", 
+                                                                         OriginControllerName = "Garage" },
+                     null)
+</p>
+
+@using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @* Blank for the radiobutton *@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicles.First().RegistrationPlate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicles.First().Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Vehicles)
+        {
+            <tr>
+                <td>
+                    @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Owner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        <input name="submit-button"
+               type="submit"
+               style="font-weight:bold;margin:10px 0 10px 0;"
+               value="Choose the selected vehicle"
+               class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+    </div>
+}

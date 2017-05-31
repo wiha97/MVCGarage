@@ -53,6 +53,12 @@ namespace MVCGarage.Repositories
             Edit(vehicle);
         }
 
+        public void Delete(int vehicleId)
+        {
+            db.Vehicles.Remove(Vehicle(vehicleId));
+            SaveChanges();
+        }
+
         private void SaveChanges()
         {
             db.SaveChanges();
