@@ -87,6 +87,28 @@ namespace MVCGarage.Controllers
             });
         }
 
+        public ActionResult CheckInVehicle()
+        {
+            // Allows the user to select a vehicle in the list of already exiting vehicles
+            // or to create a new one
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { CheckInVehicle = true });
+        }
+
+        [HttpPost]
+        public ActionResult VehicleCheckedIn(SelectAParkingSpotVM viewModel)
+        {
+            // Check in the vehicle ID to the parking spot
+            parkingSpots.CheckIn(viewModel.ParkingSpotID, viewModel.VehicleID);
+            vehicles.CheckIn(viewModel.VehicleID, viewModel.ParkingSpotID);
+
+            // Displays the chosen parking spot
+            return View(new VehicleCheckedInVM
+            {
+                Vehicle = vehicles.Vehicle(viewModel.VehicleID),
+                ParkingSpot = parkingSpots.ParkingSpot(viewModel.ParkingSpotID)
+            });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
