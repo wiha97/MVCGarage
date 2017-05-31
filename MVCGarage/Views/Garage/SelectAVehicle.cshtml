@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "Select A Vehicle";
 }
+<div class="header jumbotron">
+    <h1>Select a vehicle to park</h1>
+    <hr />
+    <p>This is where you select the vehicle you would like to park</p>
+</div>
 
-<h2>Please select the Vehicle you want to book the spot for:</h2>
-
-<p>
-    @Html.ActionLink("Create New",
+<p style="font-size: 3em; text-align: center;">
+    @Html.ActionLink("Add a new vehicle",
                      "Create",
                      "Vehicles",
                      new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
@@ -19,9 +22,10 @@
                      null)
 </p>
 
+<div class="index-table">
 @using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
 {
-    <table class="table">
+    <table>
         <tr>
             <th>
                 @* Blank for the radiobutton *@
@@ -64,13 +68,14 @@
 
     </table>
 
-    <div>
+    <div class="body-text">
         <input name="submit-button"
                type="submit"
-               style="font-weight:bold;margin:10px 0 10px 0;"
+               style="font-weight:bold;margin:20px auto; text-align: center; display:block"
                value="Choose the selected vehicle"
                class="btn btn-default" /> |
-        @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+        @Html.ActionLink("Back to List", "Index", "ParkingSpots", new { style="display: block; text-align: center;"})
         @Html.HiddenFor(model => Model.CheckInVehicle)
     </div>
 }
+</div>
