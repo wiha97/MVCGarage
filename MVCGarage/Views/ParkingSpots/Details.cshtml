@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="header jumbotron">
+    <h2>Details</h2>
+    <hr />
+    <p>View the details of your selected vehicle</p>
+</div>
 
-<h2>Details</h2>
-
-<div>
-    <h4>ParkingSpot</h4>
+<div class="jumbotron" style="color: white; font-size: 1.35em;">
+    <h2>ParkingSpot</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -31,12 +34,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => MVCGarage.Models.EnumHelper.GetDescriptionAttr(model.VehicleType))
+            @*@Html.DisplayFor(model => MVCGarage.Models.EnumHelper.GetDescriptionAttr(model.VehicleType))*@
         </dd>
 
     </dl>
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
