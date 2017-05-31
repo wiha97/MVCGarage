@@ -212,3 +212,18 @@ footer {
 .date-text {
     font-size: 0.8em;
 }
+.about-body-text {
+    width: 80%;
+    font-size: 2em;
+    margin: 0 auto;
+}
+
+.about-body-text h1 {
+    color: #ddd
+}
+
+.about-body-text p {
+    color: white;
+}
+
+
