@@ -1,10 +1,10 @@
 ﻿@model MVCGarage.Models.ParkingSpot
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit a Parking Spot";
 }
 
-<h2>Edit</h2>
+<h2>Edit a Parking Spot</h2>
 
 
 @using (Html.BeginForm())
@@ -18,18 +18,19 @@
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
+            @* Displays information about the availability of the parking spot *@
             @Html.LabelFor(model => model.VehicleID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VehicleID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VehicleID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Label, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Label, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Label, "", new { @class = "text-danger" })
+                @{if (Model.VehicleID == 0)
+                {
+                    @Html.DisplayText("Available spot")
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.VehicleID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VehicleID, "", new { @class = "text-danger" })
+                }
+                }
             </div>
         </div>
 
@@ -40,6 +41,14 @@
                                (IEnumerable<SelectListItem>)ViewBag.SelectVehicleTypes,
                                       htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Label, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Label, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Label, "", new { @class = "text-danger" })
             </div>
         </div>
 

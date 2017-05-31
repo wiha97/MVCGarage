@@ -6,7 +6,12 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm(new { originActionName = Model.OriginActionName, originControllerName = Model.OriginControllerName }))
+@using (Html.BeginForm(new
+{
+    originActionName = Model.OriginActionName,
+    originControllerName = Model.OriginControllerName,
+    checkInVehicle = Model.CheckInVehicle
+}))
 {
     @Html.AntiForgeryToken()
 

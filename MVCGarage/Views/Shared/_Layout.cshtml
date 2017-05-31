@@ -20,11 +20,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "ParkingSpots")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Check in", "#", "Vehicle")</li>
                     <li>@Html.ActionLink("Check out", "#", "Vehicle")</li>
+                    <li>@Html.ActionLink("Manage parking spots", "Index", "ParkingSpots")</li>
                     <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Garage")</li>
                     <li style="float: right;" class="search"><input type="text" name="search" placeholder="Search.." /></li>
                     <li><input type="submit" /></li>

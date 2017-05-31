@@ -38,7 +38,8 @@ namespace MVCGarage.Controllers
         // GET: ParkingSpots/Create
         public ActionResult Create(CreateParkingSpotsVM viewModel)
         {
-            ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+            if (viewModel.VehicleType == ETypeVehicle.undefined)
+                ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
             if (viewModel.OriginActionName == null)
                 viewModel.OriginActionName = "Index";
@@ -46,20 +47,48 @@ namespace MVCGarage.Controllers
             return View(viewModel);
         }
 
+        //// POST: ParkingSpots/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
+        //                           string originActionName,
+        //                           string originControllerName,
+        //                           int selectedVehicleId,
+        //                           ETypeVehicle vehicleType)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (vehicleType != ETypeVehicle.undefined)
+        //            parkingSpot.VehicleType = vehicleType;
+
+        //        db.Add(parkingSpot);
+        //        return RedirectToAction(originActionName,
+        //                                originControllerName,
+        //                                new SelectAParkingSpotVM
+        //                            {
+        //                                VehicleID = selectedVehicleId,
+        //                                ParkingSpotID = parkingSpot.ID
+        //                            });
+        //    }
+
+        //    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
+
+        //    return View(parkingSpot);
+        //}
+
         // POST: ParkingSpots/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
-                                   string originActionName,
-                                   string originControllerName,
-                                   int selectedVehicleId)
+        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
                 db.Add(parkingSpot);
-                return RedirectToAction(originActionName, originControllerName, new BookAParkingSpotVM { VehicleID = selectedVehicleId });
+                return RedirectToAction("Index");
             }
 
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();

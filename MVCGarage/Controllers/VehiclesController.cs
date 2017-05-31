@@ -1,5 +1,6 @@
 ﻿using MVCGarage.Models;
 using MVCGarage.Repositories;
+using MVCGarage.ViewModels.Garage;
 using MVCGarage.ViewModels.Vehicles;
 using System.Net;
 using System.Web.Mvc;
@@ -49,17 +50,28 @@ namespace MVCGarage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle,
                                    string originActionName,
-                                   string originControllerName)
+                                   string originControllerName,
+                                   bool checkInVehicle)
         {
             if (ModelState.IsValid)
             {
                 db.Add(vehicle);
-                return RedirectToAction(originActionName, originControllerName);
+                return RedirectToAction(originActionName, originControllerName, new SelectAVehicleVM
+                {
+                    CheckInVehicle = checkInVehicle,
+                    VehicleID = vehicle.ID
+                });
             }
 
             ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
 
-            return View(new CreateVehicleVM { Vehicle = vehicle, OriginControllerName = "Vehicles", OriginActionName = "Create" });
+            return View(new CreateVehicleVM
+            {
+                Vehicle = vehicle,
+                OriginControllerName = originControllerName,
+                OriginActionName = originActionName,
+                CheckInVehicle = checkInVehicle
+            });
         }
 
         // GET: Vehicles/Edit/5
