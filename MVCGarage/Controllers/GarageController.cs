@@ -128,6 +128,21 @@ namespace MVCGarage.Controllers
         }
 
         [HttpPost]
+        public ActionResult VehicleCheckedOut(SelectAParkingSpotVM viewModel)
+        {
+            // Check in the vehicle ID to the parking spot
+            parkingSpots.CheckIn(viewModel.ParkingSpotID, viewModel.VehicleID);
+            vehicles.CheckIn(viewModel.VehicleID, viewModel.ParkingSpotID);
+
+            // Displays the chosen parking spot
+            return View(new VehicleCheckedOutVM
+            {
+                Vehicle = vehicles.Vehicle(viewModel.VehicleID),
+                ParkingSpot = parkingSpots.ParkingSpot(viewModel.ParkingSpotID)
+            });
+        }
+
+        [HttpPost]
         public ActionResult VehicleCheckedIn(SelectAParkingSpotVM viewModel)
         {
             // Check in the vehicle ID to the parking spot
