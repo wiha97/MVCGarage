@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Parked vehicles", "Index", "Vehicle")</li>
-                    <li>@Html.ActionLink("Check in", "#", "Vehicle")</li>
+                    <li>@Html.ActionLink("Check in", "CheckInVehicle", "Garage")</li>
                     <li>@Html.ActionLink("Check out", "#", "Vehicle")</li>
                     <li>@Html.ActionLink("Manage parking spots", "Index", "ParkingSpots")</li>
                     <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Garage")</li>
@@ -36,11 +36,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+    </div>
         <footer>
             <p>&copy; @DateTime.Now.Year - Liam, Wilhelm, Mike</p>
         </footer>
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -48,6 +48,7 @@ namespace MVCGarage.Repositories
         {
             Vehicle vehicle = Vehicle(vehicleId);
             vehicle.ParkingSpotID = parkingSpotId;
+            vehicle.CheckInTime = DateTime.Now;
             Edit(vehicle);
         }
 

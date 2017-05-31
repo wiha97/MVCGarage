@@ -178,6 +178,7 @@
     <Compile Include="ViewModels\Garage\SelectAParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\BookedParkingSpotVM.cs" />
     <Compile Include="ViewModels\Garage\SelectAVehicleVM.cs" />
+    <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\CreateParkingSpotsVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\EditParkingSpotVM.cs" />
     <Compile Include="ViewModels\Vehicles\CreateVehicleVM.cs" />
@@ -241,6 +242,7 @@
     <Content Include="Views\Garage\SelectAParkingSpot.cshtml" />
     <Content Include="Views\Garage\ParkingSpotBooked.cshtml" />
     <Content Include="Views\Garage\SelectAVehicle.cshtml" />
+    <Content Include="Views\Garage\VehicleCheckedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705300821100_Initial.resx">
