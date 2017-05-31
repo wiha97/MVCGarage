@@ -4,32 +4,31 @@
     ViewBag.Title = "Book A Parking Spot";
 }
 
-<h2>The following vehicle has been checekd in:</h2>
+<h2>The following vehicle has been checked in:</h2>
 
 <div>
     <h4>Vehicle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
-        </dt>
-        <dd>
+            @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
             @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
         </dt>
-        <dd>
+            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
             @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
-        </dd>
+        </dt>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.Owner)
-        </dt>
-        <dd>
+            @Html.DisplayNameFor(model => model.Vehicle.Owner):
+        
             @Html.DisplayFor(model => model.Vehicle.Owner)
-        </dd>
+        </dt>
+
+        <dt>
+            @Html.DisplayName("Check in time:")
+        
+            @Html.DisplayFor(model => model.Vehicle.CheckInTime)
+        </dt>
     </dl>
 </div>
 
