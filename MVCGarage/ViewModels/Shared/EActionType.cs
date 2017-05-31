@@ -9,6 +9,6 @@ namespace MVCGarage.ViewModels.Shared
     {
         CheckIn,
         CheckOut,
-        BookASpot
+        BookAParkingSpot
     }
 }

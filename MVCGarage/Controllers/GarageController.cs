@@ -24,7 +24,7 @@ namespace MVCGarage.Controllers
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
-            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.BookASpot });
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.BookAParkingSpot });
         }
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace MVCGarage.Controllers
 
             switch (viewModel.ActionType)
             {
-                case EActionType.BookASpot:
+                case EActionType.BookAParkingSpot:
                 case EActionType.CheckIn:
                     followingActionName = "SelectAParkingSpot";
                     ViewBag.ActionName = "park";
@@ -71,11 +71,11 @@ namespace MVCGarage.Controllers
 
             switch (viewModel.ActionType)
             {
-                case EActionType.BookASpot:
+                case EActionType.BookAParkingSpot:
                     originActionName = "ParkingSpotBooked";
                     break;
                 case EActionType.CheckIn:
-                    originActionName = "VehicleCheckedIn";
+                originActionName = "VehicleCheckedIn";
                     break;
             }
 
@@ -118,6 +118,13 @@ namespace MVCGarage.Controllers
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
             return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.CheckIn });
+        }
+
+        public ActionResult CheckOutVehicle()
+        {
+            // Allows the user to select a vehicle in the list of already exiting vehicles
+            // or to create a new one
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.CheckOut });
         }
 
         [HttpPost]
