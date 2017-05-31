@@ -1,7 +1,7 @@
 ﻿@model MVCGarage.ViewModels.Garage.VehicleCheckedInVM
 
 @{
-    ViewBag.Title = "Book A Parking Spot";
+    ViewBag.Title = "Check in a vehicle";
 }
 
 <h2>The following vehicle has been checked in:</h2>
@@ -14,19 +14,19 @@
             @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
             @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
         </dt>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
             @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
         </dt>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.Owner):
-        
+            @Html.DisplayNameFor(model => model.Vehicle.Owner):        
             @Html.DisplayFor(model => model.Vehicle.Owner)
         </dt>
 
         <dt>
-            @Html.DisplayName("Check in time:")
-        
+            @Html.DisplayName("Check in time:")        
             @Html.DisplayFor(model => model.Vehicle.CheckInTime)
         </dt>
     </dl>
@@ -37,12 +37,9 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
-        </dt>
-
-        <dd>
+            @Html.DisplayNameFor(model => model.ParkingSpot.Label):
             @Html.DisplayFor(model => model.ParkingSpot.Label)
-        </dd>
+        </dt>
     </dl>
 </div>
 <p>

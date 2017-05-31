@@ -181,6 +181,7 @@
     <Compile Include="ViewModels\Garage\VehicleCheckedInVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\CreateParkingSpotsVM.cs" />
     <Compile Include="ViewModels\ParkingSpots\EditParkingSpotVM.cs" />
+    <Compile Include="ViewModels\Shared\EActionType.cs" />
     <Compile Include="ViewModels\Vehicles\CreateVehicleVM.cs" />
   </ItemGroup>
   <ItemGroup>
