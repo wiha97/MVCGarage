@@ -10,7 +10,7 @@
 </div>
 
 <p style="font-size: 2em; text-align: center;">
-    @Html.ActionLink("Park a car", "Create")
+    @Html.ActionLink("Create a new parking spot", "Create")
 </p>
 <div class="index-table">
     <table>
@@ -23,6 +23,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VehicleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
             </th>
             <th></th>
         </tr>
@@ -47,9 +50,17 @@
                     @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @if (item.VehicleID == null)
+                    {
+                        <text> |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </text>
+                    }
                 </td>
             </tr>
         }

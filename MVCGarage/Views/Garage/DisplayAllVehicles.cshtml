@@ -1,0 +1,127 @@
+﻿@model MVCGarage.ViewModels.Garage.DisplayVehiclesVM
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div>
+        <div class="header">
+            <h1>Vehicles currently registered</h1>
+            <hr />
+            <p>These are the Vehicles that are currently registered with us</p>
+        </div>
+        <p style="color: white; text-align: center; font-size: 2em;">
+            @Html.ActionLink("Register a Vehicle", "Create")
+        </p>
+        <table class="index-table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Parked?")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().Owner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().RegistrationPlate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().CheckInTime)
+                </th>
+                <th>
+                    @Html.DisplayName("Parking spot")
+                </th>
+                <th>
+                    @Html.DisplayName("Fee")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Vehicles)
+            {
+                MVCGarage.Models.ParkingSpot parkingSpot = Model.ParkingSpotsVehicles[item.ID];
+                MVCGarage.Models.ParkingSpot bookedParkingSpot = Model.BookedParkingSpots[item.ID];
+
+                <tr>
+                    <td>
+                        @if (item.ParkingSpotID == null)
+                        {
+                            @Html.DisplayName("No")
+                        }
+                        else
+                        {
+                            @Html.DisplayName("Yes")
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckInTime)
+                    </td>
+                    @if (parkingSpot != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => parkingSpot.Label)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => parkingSpot.Fee)/min.
+                        </td>
+                    }
+                    else if (bookedParkingSpot != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => bookedParkingSpot.Label)
+                        </td>
+                        <td>
+                            @Html.DisplayName(bookedParkingSpot.MonthlyFee().ToString("#.##"))/month
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
+                    <td>
+                        @* Custom actions, depending on the parked/unparked status of the vehicle *@
+                        @if (item.ParkingSpotID == null)
+                        {
+                            if (Model.BookedParkingSpots[item.ID] == null)
+                            {
+                                @Html.ActionLink("Check in", "CheckInAVehicle", new { vehicleId = item.ID })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Unbook parking spot",
+                                                 "UnbookParkingSpot",
+                                                 new
+                                                 {
+                                                     vehicleId = item.ID,
+                                                     parkingSpotId = Model.BookedParkingSpots[item.ID].ID
+                                                 })
+                            }
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Check out", "CheckOutAVehicle", new { vehicleId = item.ID })
+                        }
+                        | @Html.ActionLink("Details", "Details", "Vehicles", new { id = item.ID }, null)
+                        @if (bookedParkingSpot == null && parkingSpot == null)
+                        {
+                           <text> | @Html.ActionLink("Delete", "Delete", "Vehicles", new { id = item.ID }, null)</text>
+                        }
+                    </td>
+                </tr>
+                        }
+
+        </table>
+    </div>
+</div>

@@ -50,11 +50,19 @@ namespace MVCGarage.Repositories
             Edit(parkingSpot);
         }
 
-        public void CheckOut(int parkingSpotId)
+        public void CheckOut(int? parkingSpotId)
         {
-            ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
-            parkingSpot.VehicleID = null;
-            Edit(parkingSpot);
+            if (parkingSpotId != null)
+            {
+                ParkingSpot parkingSpot = ParkingSpot(parkingSpotId);
+                parkingSpot.VehicleID = null;
+                Edit(parkingSpot);
+            }
+        }
+
+        public ParkingSpot BookedParkingSpot(int vehicleId)
+        {
+            return ParkingSpots().SingleOrDefault(p => p.VehicleID == vehicleId);
         }
 
         public void Delete(int id)

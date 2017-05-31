@@ -1,0 +1,89 @@
+﻿@model MVCGarage.ViewModels.Garage.VehicleCheckedOutVM
+
+@{
+    ViewBag.Title = "Check out a vehicle";
+}
+
+<h2>Your vehicle has successfully been checked out</h2>
+
+<div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
+        </dt>
+        <dd>
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Owner)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
+        </dd>
+    </dl>
+
+    <h4>Parking spot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParkingSpot.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingSpot.Fee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParkingSpot.Fee)/min.
+        </dd>
+    </dl>
+
+    <h4>Total amount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Check in time:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Vehicle.CheckInTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Current time:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.CheckOutTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Total time:")
+        </dt>
+        <dd>
+            @Html.DisplayName(Model.NbMinutes.ToString(@"hh\:mm"))
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Total amount:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.NbMinutes) *
+            @Html.DisplayFor(model => Model.ParkingSpot.Fee) =
+            @Html.DisplayFor(model => Model.TotalAmount)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</p>

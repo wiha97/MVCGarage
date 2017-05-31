@@ -47,43 +47,12 @@ namespace MVCGarage.Controllers
             return View(viewModel);
         }
 
-        //// POST: ParkingSpots/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot,
-        //                           string originActionName,
-        //                           string originControllerName,
-        //                           int selectedVehicleId,
-        //                           ETypeVehicle vehicleType)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (vehicleType != ETypeVehicle.undefined)
-        //            parkingSpot.VehicleType = vehicleType;
-
-        //        db.Add(parkingSpot);
-        //        return RedirectToAction(originActionName,
-        //                                originControllerName,
-        //                                new SelectAParkingSpotVM
-        //                            {
-        //                                VehicleID = selectedVehicleId,
-        //                                ParkingSpotID = parkingSpot.ID
-        //                            });
-        //    }
-
-        //    ViewBag.SelectVehicleTypes = EnumHelper.PopulateDropList();
-
-        //    return View(parkingSpot);
-        //}
-
         // POST: ParkingSpots/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +87,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
