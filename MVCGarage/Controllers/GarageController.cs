@@ -32,7 +32,7 @@ namespace MVCGarage.Controllers
             return View(new SelectAVehicleVM
             {
                 CheckInVehicle = viewModel.CheckInVehicle,
-                Vehicles = vehicles.GetAllVehicles(),
+                Vehicles = vehicles.UnparkedVehicles(),
                 VehicleID = viewModel.VehicleID
             });
         }

@@ -83,7 +83,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Create([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,VehicleType")] ParkingSpot parkingSpot)
+        public ActionResult Edit([Bind(Include = "ID,VehicleID,Label,Fee,VehicleType")] ParkingSpot parkingSpot)
         {
             if (ModelState.IsValid)
             {

@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.VehicleType)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
             <th></th>
         </tr>
 
@@ -45,6 +48,9 @@
                 </td>
                 <td>
                     @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

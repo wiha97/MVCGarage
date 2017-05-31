@@ -14,7 +14,7 @@ namespace MVCGarage.Controllers
         // GET: Vehicles
         public ActionResult Index()
         {
-            return View(db.GetAllVehicles());
+            return View(db.ParkedVehicles());
         }
 
         // GET: Vehicles/Details/5
@@ -48,7 +48,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle,
+        public ActionResult Create([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle,
                                    string originActionName,
                                    string originControllerName,
                                    bool checkInVehicle)
@@ -94,7 +94,7 @@ namespace MVCGarage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,CheckOutTime,ParkingSpot")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "ID,VehicleType,Owner,Fee,RegistrationPlate,CheckInTime,ParkingSpot")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

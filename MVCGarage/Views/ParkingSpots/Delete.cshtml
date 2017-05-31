@@ -14,7 +14,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.VehicleID)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.VehicleID)
         </dd>
@@ -22,7 +21,6 @@
         <dt>
             @Html.DisplayNameFor(model => model.Label)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Label)
         </dd>
@@ -30,14 +28,20 @@
         <dt>
             @Html.DisplayNameFor(model => model.VehicleType)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.VehicleType)
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.VehicleType))
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Fee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fee)
+        </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
