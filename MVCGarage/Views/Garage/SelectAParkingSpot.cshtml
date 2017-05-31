@@ -3,8 +3,11 @@
 @{
     ViewBag.Title = "Select A Parking Spot";
 }
-
-<h2>Please select a parking spot:</h2>
+<div class="header jumbotron">
+    <h1>Select a parking spot</h1>
+    <hr />
+    <p>This is where you select a parking spot</p>
+</div>
 
 <div>
     <dl class="dl-horizontal">
@@ -47,7 +50,7 @@
 
 @using (@Html.BeginForm(Model.OriginActionName, Model.OriginControllerName, FormMethod.Post))
 {
-    <table class="table">
+    <table>
         <tr>
             <th>
                 @* Blank for the radiobutton *@
