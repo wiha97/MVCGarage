@@ -1,5 +1,4 @@
 ﻿using MVCGarage.Models;
-using MVCGarage.ViewModels.Shared;
 using System.Collections.Generic;
 
 namespace MVCGarage.ViewModels.Garage
@@ -9,9 +8,6 @@ namespace MVCGarage.ViewModels.Garage
         public IEnumerable<Vehicle> Vehicles { get; set; }
         public int VehicleID { get; set; }
 
-        public EActionType ActionType { get; set; }
-
-        public string FollowingActionName { get; set; }
-        public string FollowingControllerName { get; set; }
+        public bool CheckInVehicle { get; set; }
     }
 }

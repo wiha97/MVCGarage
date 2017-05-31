@@ -12,7 +12,7 @@ namespace MVCGarage.Repositories
     {
         private GarageContext db = new GarageContext();
 
-        public IEnumerable<Vehicle> Vehicles()
+        public IEnumerable<Vehicle> GetAllVehicles()
         {
             return db.Vehicles;
         }
@@ -22,14 +22,9 @@ namespace MVCGarage.Repositories
             return db.Vehicles.Find(id);
         }
 
-        public IEnumerable<Vehicle> ParkedVehicles(ETypeVehicle vehicleType = ETypeVehicle.undefined)
+        public IEnumerable<Vehicle> ParkedVehicles(ETypeVehicle vehicleType)
         {
-            return Vehicles().Where(p => (vehicleType == ETypeVehicle.undefined || p.VehicleType == vehicleType) && p.ParkingSpotID != null);
-        }
-
-        public IEnumerable<Vehicle> UnparkedVehicles(ETypeVehicle vehicleType = ETypeVehicle.undefined)
-        {
-            return Vehicles().Where(p => (vehicleType == ETypeVehicle.undefined || p.VehicleType == vehicleType) && p.ParkingSpotID == null);
+            return GetAllVehicles().Where(p => p.VehicleType == vehicleType && p.ParkingSpot == null);
         }
 
         public void Add(Vehicle vehicle)
@@ -47,7 +42,7 @@ namespace MVCGarage.Repositories
         public void CheckIn(int vehicleId, int parkingSpotId)
         {
             Vehicle vehicle = Vehicle(vehicleId);
-            vehicle.ParkingSpotID = parkingSpotId;
+            vehicle.ParkingSpot = parkingSpotId;
             vehicle.CheckInTime = DateTime.Now;
             Edit(vehicle);
         }
@@ -55,7 +50,7 @@ namespace MVCGarage.Repositories
         public void CheckOut(int vehicleId)
         {
             Vehicle vehicle = Vehicle(vehicleId);
-            vehicle.ParkingSpotID = null;
+            vehicle.ParkingSpot = null;
             Edit(vehicle);
         }
 
@@ -71,7 +66,6 @@ namespace MVCGarage.Repositories
         }
 
         #region IDisposable Support
-
         private bool disposedValue = false; // To detect redundant calls
 
         // This code added to correctly implement the disposable pattern.
@@ -93,7 +87,13 @@ namespace MVCGarage.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         #endregion
+
+
+
+
+
+
+
     }
 }

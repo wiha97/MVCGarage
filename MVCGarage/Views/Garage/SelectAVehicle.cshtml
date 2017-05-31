@@ -4,9 +4,9 @@
     ViewBag.Title = "Select A Vehicle";
 }
 <div class="header jumbotron">
-    <h1>Please select a vehicle to @ViewBag.ActionName</h1>
+    <h1>Select a vehicle to park</h1>
     <hr />
-    <p>This is where you select the vehicle you would like to @ViewBag.ActionName</p>
+    <p>This is where you select the vehicle you would like to park</p>
 </div>
 
 <p style="font-size: 3em; text-align: center; color: white;">
@@ -17,12 +17,12 @@
                      {
                          OriginActionName = "SelectAVehicle",
                          OriginControllerName = "Garage",
-                         ActionType = Model.ActionType
+                         CheckInVehicle = Model.CheckInVehicle
                      },
                      null)
 </p>
 
-@using (@Html.BeginForm(Model.FollowingActionName, Model.FollowingControllerName, FormMethod.Get))
+@using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
 {
     <div class="index-table">
         <table>
@@ -76,6 +76,6 @@
                    value="Choose the selected vehicle"
                    class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index", "ParkingSpots", new { style = "display: block; text-align: center;" })
-            @Html.HiddenFor(model => Model.ActionType)
+            @Html.HiddenFor(model => Model.CheckInVehicle)
         </div>
 }
