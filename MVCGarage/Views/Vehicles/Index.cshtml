@@ -13,46 +13,65 @@
         <p style="color: white; text-align: center; font-size: 2em;">
             @Html.ActionLink("Register a Vehicle", "Create")
         </p>
-        <table class="index-table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.VehicleType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Owner)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RegistrationPlate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CheckInTime)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <div class="index-table">
+            <table>
                 <tr>
-                    <td>
-                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Owner)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RegistrationPlate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CheckInTime)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VehicleType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Owner)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fee)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationPlate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CheckInTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CheckOutTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ParkingSpot)
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VehicleType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Owner)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fee)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckInTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckOutTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParkingSpot)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
-</div>

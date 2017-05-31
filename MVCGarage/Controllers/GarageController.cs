@@ -10,7 +10,6 @@ using MVCGarage.DataAccess;
 using MVCGarage.Models;
 using MVCGarage.Repositories;
 using MVCGarage.ViewModels.Garage;
-using MVCGarage.ViewModels.Shared;
 
 namespace MVCGarage.Controllers
 {
@@ -24,35 +23,17 @@ namespace MVCGarage.Controllers
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
-            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.BookAParkingSpot });
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { CheckInVehicle = false });
         }
 
         [HttpGet]
         public ActionResult SelectAVehicle(SelectAVehicleVM viewModel)
         {
-            string followingActionName = string.Empty;
-            string followingControllerName = "Garage";
-
-            switch (viewModel.ActionType)
-            {
-                case EActionType.BookAParkingSpot:
-                case EActionType.CheckIn:
-                    followingActionName = "SelectAParkingSpot";
-                    ViewBag.ActionName = "park";
-                    break;
-                case EActionType.CheckOut:
-                    followingActionName = "VehicleCheckedOut";
-                    ViewBag.ActionName = "check out";
-                    break;
-            }
-
             return View(new SelectAVehicleVM
             {
-                ActionType = viewModel.ActionType,
-                Vehicles = vehicles.UnparkedVehicles(),
-                VehicleID = viewModel.VehicleID,
-                FollowingActionName = followingActionName,
-                FollowingControllerName = followingControllerName
+                CheckInVehicle = viewModel.CheckInVehicle,
+                Vehicles = vehicles.GetAllVehicles(),
+                VehicleID = viewModel.VehicleID
             });
         }
 
@@ -66,18 +47,11 @@ namespace MVCGarage.Controllers
             if (vehicle == null)
                 return RedirectToAction("Index", "ParkingSpots");
 
-            string originActionName = string.Empty;
+            string originActionName = "ParkingSpotBooked";
             string originControllerName = "Garage";
 
-            switch (viewModel.ActionType)
-            {
-                case EActionType.BookAParkingSpot:
-                    originActionName = "ParkingSpotBooked";
-                    break;
-                case EActionType.CheckIn:
+            if (viewModel.CheckInVehicle)
                 originActionName = "VehicleCheckedIn";
-                    break;
-            }
 
             // Allows the user to select an available parking spot (if any), depending on the type of vehicle
             return View(new SelectAParkingSpotVM
@@ -92,11 +66,11 @@ namespace MVCGarage.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectAParkingSpot(EActionType actionType)
+        public ActionResult SelectAParkingSpot(bool checkInVehicle)
         {
             // We end up here from the "Create" view of "ParkingSpots", called by the "SelectAParkingSpot/Get"
             // Just need to redirect to the origin view
-            return RedirectToAction("SelectAParkingSpot", new { actionType = actionType });
+            return RedirectToAction("SelectAParkingSpot", new { checkInVehicle = checkInVehicle });
         }
 
         [HttpPost]
@@ -117,14 +91,7 @@ namespace MVCGarage.Controllers
         {
             // Allows the user to select a vehicle in the list of already exiting vehicles
             // or to create a new one
-            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.CheckIn });
-        }
-
-        public ActionResult CheckOutVehicle()
-        {
-            // Allows the user to select a vehicle in the list of already exiting vehicles
-            // or to create a new one
-            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { ActionType = EActionType.CheckOut });
+            return RedirectToAction("SelectAVehicle", new SelectAVehicleVM { CheckInVehicle = true });
         }
 
         [HttpPost]

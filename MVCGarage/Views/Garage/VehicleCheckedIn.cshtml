@@ -1,34 +1,35 @@
 ﻿@model MVCGarage.ViewModels.Garage.VehicleCheckedInVM
 
 @{
-    ViewBag.Title = "Check in a vehicle";
+    ViewBag.Title = "Book A Parking Spot";
 }
 
-<h2>The following vehicle has been checked in:</h2>
+<h2>The following vehicle has been checekd in:</h2>
 
 <div>
     <h4>Vehicle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
+            @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
+        </dt>
+        <dd>
             @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
-        </dt>
+        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
+            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
+        </dt>
+        <dd>
             @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
-        </dt>
+        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.Owner):        
+            @Html.DisplayNameFor(model => model.Vehicle.Owner)
+        </dt>
+        <dd>
             @Html.DisplayFor(model => model.Vehicle.Owner)
-        </dt>
-
-        <dt>
-            @Html.DisplayName("Check in time:")        
-            @Html.DisplayFor(model => model.Vehicle.CheckInTime)
-        </dt>
+        </dd>
     </dl>
 </div>
 
@@ -37,9 +38,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Label):
-            @Html.DisplayFor(model => model.ParkingSpot.Label)
+            @Html.DisplayNameFor(model => model.ParkingSpot.Label)
         </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParkingSpot.Label)
+        </dd>
     </dl>
 </div>
 <p>

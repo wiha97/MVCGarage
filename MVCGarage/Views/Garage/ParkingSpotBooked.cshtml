@@ -3,40 +3,52 @@
 @{
     ViewBag.Title = "Book A Parking Spot";
 }
+<div class="jumbotron" style="color: white;">
+    <h2>The following parking spot has been booked:</h2>
 
-<h2>The following parking spot has been booked:</h2>
+    <div>
+        <h4>Vehicle</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Vehicle.VehicleType)
+            </dt>
+            <dd>
+                @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
+            </dd>
 
-<div>
-    <h4>Vehicle</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
-            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
-            @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vehicle.Owner)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vehicle.Owner)
+            </dd>
+        </dl>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle.Owner):
-            @Html.DisplayFor(model => model.Vehicle.Owner)
-        </dt>
-    </dl>
+    <div>
+        <hr />
+        <h2>Parking Spot</h2>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ParkingSpot.Label)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ParkingSpot.Label)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+    </p>
 </div>
-
-<div>
-    <h4>Parking Spot</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ParkingSpot.Label):
-            @Html.DisplayFor(model => model.ParkingSpot.Label)
-        </dt>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Back to List", "Index", "ParkingSpots")
-</p>
