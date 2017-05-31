@@ -1,4 +1,3 @@
-C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\ApplicationInsights.config
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\roslyn\csc.exe
 C:\Users\elevGr2\Liam\GitHub\Repos\MVCGarage\MVCGarage\bin\roslyn\csc.exe.config
@@ -368,3 +367,4 @@ C:\Users\elevGr2\Liam\Projets\MVCGarage\MVCGarage\obj\Debug\MVCGarage.dll
 C:\Users\elevGr2\Liam\Projets\MVCGarage\MVCGarage\obj\Debug\MVCGarage.pdb
 C:\Users\elevGr2\Liam\Projets\MVCGarage\MVCGarage\obj\Debug\MVCGarage.csprojResolveAssemblyReference.cache
 C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial1.resources
+C:\Users\wille\Source\Repos\MVCGarage\MVCGarage\obj\Debug\MVCGarage.Migrations.Initial2.resources

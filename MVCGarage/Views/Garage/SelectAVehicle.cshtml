@@ -17,7 +17,7 @@
                      {
                          OriginActionName = "SelectAVehicle",
                          OriginControllerName = "Garage",
-                         CheckInVehicle = Model.CheckInVehicle
+                         ActionType = Model.ActionType
                      },
                      null)
 </p>
@@ -76,6 +76,6 @@
                    value="Choose the selected vehicle"
                    class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index", "ParkingSpots", new { style = "display: block; text-align: center;" })
-            @Html.HiddenFor(model => Model.CheckInVehicle)
+            @Html.HiddenFor(model => Model.ActionType)
         </div>
 }
