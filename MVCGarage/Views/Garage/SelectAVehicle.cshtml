@@ -1,0 +1,81 @@
+﻿@model MVCGarage.ViewModels.Garage.SelectAVehicleVM
+
+@{
+    ViewBag.Title = "Select A Vehicle";
+}
+<div class="header jumbotron">
+    <h1>Please select a vehicle to @ViewBag.ActionName</h1>
+    <hr />
+    <p>This is where you select the vehicle you would like to @ViewBag.ActionName</p>
+</div>
+
+<p style="font-size: 3em; text-align: center; color: white;">
+    @Html.ActionLink("Add a new vehicle",
+                     "Create",
+                     "Vehicles",
+                     new MVCGarage.ViewModels.Vehicles.CreateVehicleVM
+                     {
+                         OriginActionName = "SelectAVehicle",
+                         OriginControllerName = "Garage",
+                         ActionType = Model.ActionType
+                     },
+                     null)
+</p>
+
+@using (@Html.BeginForm("SelectAParkingSpot", "Garage", FormMethod.Get))
+{
+    <div class="index-table">
+        <table>
+            <tr>
+                <th>
+                    @* Blank for the radiobutton *@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().RegistrationPlate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().Owner)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicles.First().VehicleType)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Vehicles)
+            {
+                <tr>
+                    <td>
+                        @if (Model.VehicleID == item.ID)
+                    {
+                            @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID, new { @autofocus = "autofocus", Checked = "checked" })
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(modelItem => Model.VehicleID, item.ID)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner)
+                    </td>
+                    <td>
+                        @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(item.VehicleType))
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+        <div class="body-text">
+            <input name="submit-button"
+                   type="submit"
+                   style="font-weight:bold;margin:20px auto; text-align: center; display:block"
+                   value="Choose the selected vehicle"
+                   class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", "ParkingSpots", new { style = "display: block; text-align: center;" })
+            @Html.HiddenFor(model => Model.ActionType)
+        </div>
+}

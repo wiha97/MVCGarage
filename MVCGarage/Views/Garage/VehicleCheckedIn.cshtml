@@ -1,0 +1,47 @@
+﻿@model MVCGarage.ViewModels.Garage.VehicleCheckedInVM
+
+@{
+    ViewBag.Title = "Check in a vehicle";
+}
+
+<h2>The following vehicle has been checekd in:</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.VehicleType):
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.Vehicle.VehicleType))
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.RegistrationPlate):
+            @Html.DisplayFor(model => model.Vehicle.RegistrationPlate)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Owner):
+            @Html.DisplayFor(model => model.Vehicle.Owner)
+        </dt>
+
+        <dt>
+            @Html.DisplayName("Check in time:")
+            @Html.DisplayFor(model => model.Vehicle.CheckInTime)
+        </dt>
+    </dl>
+</div>
+
+<div>
+    <h4>Parking Spot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingSpot.Label):
+            @Html.DisplayFor(model => model.ParkingSpot.Label)
+        </dt>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "ParkingSpots")
+</p>

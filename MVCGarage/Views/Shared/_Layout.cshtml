@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
 </head>
 <body class="body-bg">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,12 +20,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "ParkingSpots")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vehicles management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("All vehicles", "DisplayAllVehicles", "Garage")</li>
+                            <li>@Html.ActionLink("Parked vehicles", "DisplayParkedVehicles", "Garage")</li>
+                            <li>@Html.ActionLink("Check in", "CheckInVehicle", "Garage")</li>
+                            <li>@Html.ActionLink("Check out", "CheckOutVehicle", "Garage")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parking places management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Manage parking spots", "Index", "ParkingSpots")</li>
+                            <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Garage")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Check in", "#", "Vehicle")</li>
-                    <li>@Html.ActionLink("Check out", "#", "Vehicle")</li>
-                    <li>@Html.ActionLink("Book a spot", "BookAParkingSpot", "Garage")</li>
                     <li style="float: right;" class="search"><input type="text" name="search" placeholder="Search.." /></li>
                     <li><input type="submit" /></li>
                 </ul>
@@ -34,11 +47,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Liam, Wilhelm, Mike</p>
-        </footer>
     </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Liam, Wilhelm, Mike</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

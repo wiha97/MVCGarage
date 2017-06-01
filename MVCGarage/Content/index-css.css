@@ -89,7 +89,7 @@ body {
 .active {
     background-color: #9AE19D;
     color: #ccc;
-}*/*/
+}*/
 
 .body-text {
     color: white;
@@ -121,7 +121,8 @@ body {
     }
 
 .index-table {
-    margin-bottom: 150px;
+    margin-top: 4em;
+    margin-bottom: 2em;
 }
 
     .index-table table {
@@ -206,8 +207,24 @@ footer {
     padding: 15px;
     text-align: left;
     vertical-align: middle;
+    width: 100%;
 }
 
 .date-text {
     font-size: 0.8em;
 }
+.about-body-text {
+    width: 80%;
+    font-size: 2em;
+    margin: 0 auto;
+}
+
+.about-body-text h1 {
+    color: #ddd
+}
+
+.about-body-text p {
+    color: white;
+}
+
+

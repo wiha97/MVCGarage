@@ -1,80 +1,73 @@
-﻿@model MVCGarage.ViewModels.Garage.BookAParkingSpotVM
+﻿@model MVCGarage.ViewModels.Garage.SelectAParkingSpotVM
 
 @{
     ViewBag.Title = "Select A Parking Spot";
 }
+<div class="header jumbotron">
+    <h1>Select a parking spot</h1>
+    <hr />
+    <p>This is where you select a parking spot</p>
+</div>
 
-<h2>Please select a parking spot:</h2>
-
-<div>
+<div class="about-body-text" style="color: white; margin-top: 10em; text-align: center;">
     <dl class="dl-horizontal">
-        @{MVCGarage.Models.Vehicle selectedVehicle = Model.Vehicles.Single(v => v.ID == Model.VehicleID);}
-
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.RegistrationPlate)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.VehicleType)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.RegistrationPlate)
+            @Html.DisplayName(MVCGarage.Models.EnumHelper.GetDescriptionAttr(Model.SelectedVehicle.VehicleType))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.Owner)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.RegistrationPlate)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.Owner)
+            @Html.DisplayFor(model => Model.SelectedVehicle.RegistrationPlate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => selectedVehicle.VehicleType)
+            @Html.DisplayNameFor(model => Model.SelectedVehicle.Owner)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => selectedVehicle.VehicleType)
+            @Html.DisplayFor(model => Model.SelectedVehicle.Owner)
         </dd>
-
     </dl>
 </div>
 
-<p>
-    @Html.ActionLink("Create New",
-                     "Create",
-                     "ParkingSpots",
-                     new MVCGarage.ViewModels.ParkingSpots.CreateParkingSpotsVM
-                     {
-                         OriginActionName = "SelectAParkingSpot",
-                         OriginControllerName = "Garage",
-                         SelectedVehicleId = Model.VehicleID
-                     },
-                     null)
-</p>
-
-@using (@Html.BeginForm("ParkingSpotSelected", "Garage", FormMethod.Post))
+@using (@Html.BeginForm(Model.FollowingActionName, Model.FollowingControllerName, FormMethod.Post))
 {
-    <table class="table">
-        <tr>
-            <th>
-                @* Blank for the radiobutton *@
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkingSpots.First().Label)
-            </th>
-        </tr>
-
-        @foreach (var item in Model.ParkingSpots)
-        {
+    <div class="index-table">
+        <table>
             <tr>
-                <td>
-                    @Html.RadioButtonFor(modelItem => modelItem.ParkingSpotID, item.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Label)
-                </td>
+                <th>
+                    @* Blank for the radiobutton *@
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkingSpots.First().Label)
+                </th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model.ParkingSpots)
+            {
+                <tr>
+                    <td>
+                        @if (Model.ParkingSpotID == item.ID)
+                    {
+                            @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID, new { Checked = "checked" })
+                        }
+                        else
+                        {
+                            @Html.RadioButtonFor(modelItem => Model.ParkingSpotID, item.ID)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 
     <div>
         <input name="submit-button"
