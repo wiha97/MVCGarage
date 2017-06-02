@@ -10,7 +10,7 @@ namespace MVCGarage.Models
         public int ID { get; set; }
 
         [Display(Name = "Vehicle type")]
-        public ETypeVehicle VehicleType { get; set; }
+        public ETypeVehicle VehicleType { get; set; } 
 
         [Display(Name = "Owner")]
         public string Owner { get; set; }
